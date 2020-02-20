@@ -49,7 +49,7 @@ echo "file tercipta : $NamaFileAwal.txt"
 ```
 
 ### Penjelasan
-  a.Menggunakan "head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28" untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
+  a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
   
   b. Membaca argumen pertama (nama_file) tanpa format file dibelakangnya, lalu membuang setiap angka yang ada terdapat pada nama_file. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
   
