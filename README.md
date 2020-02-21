@@ -27,10 +27,15 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
   b. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dengan pengelompokan per State yang disimpan diarray arr. Mengeprint jumlah profit dari setiap state beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil kedua paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama statenya saja yang memiliki profit paling kecil pertama dan kedua pada array `mybro`
   
   c.Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dan hanya memiliki state yang diperoleh dari pekerjaan "b" dengan pengelompokan per Product Line yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Product Line beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil sepuluh paling atas. Lalu memanggil `awk` kembali untuk mengeprint nama Product Linenya saja yang memiliki profit paling kecil pertama hingga kesepuluh
-  
+
+* `-F` digunakan untuk menentukan separator bila `'\t'` berarti separatornya adalah tab sedangkan jika `','` maka separatornya koma
+* `NR>1` digunakan untuk mengabaikan baris pertama pada file yang diakses karna hanya berisi nama kolom
+* `{arr[$13]+=$21}` digunakan untuk mengelompokkan setiap profit kedalam array arr dengan Region sebagai indeks
 * `-v` digunakan untuk memberi awk akses ke variabel yang meow dan mybro[] yang dialokasikan ke variabel x,y, dan z
-* saat dilakukan awk kedua menggunakan separator koma sesuai dengan print dari awk pertama
+* saat dilakukan `awk` kedua menggunakan separator koma sesuai dengan print dari awk pertama
+* `sort -n` digunakan agar sorting numerically dari bilangan terkecil
 * `LC_ALL=C` digunakan agar sorting byte-wise dan nilai xxx.yy(ratusan koma) tidak dibaca sebagai xxxyy(puluhan ribuan)
+* `head -x` digunakan agar hasil `awk` pertama ditampilkan sebanyak nilai x dari result paling atas(paling kecil)
 
 
 ## 2. Pengamanan Kode Random dengan Enkripsi Cipher
@@ -55,8 +60,14 @@ echo "file tercipta : $NamaFileAwal.txt"
 ### Penjelasan
   a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
   
-  b. Membaca argumen pertama (nama_file) tanpa format file dibelakangnya, lalu membuang setiap angka yang ada terdapat pada nama_file. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
-  
+  b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
+
+
+* `${1%.*}` digunakan untuk membuang format file dari argumen pertama
+* `NamaFileAwal//[[:digit:]]/` digunakan untuk membuang setiap digit dari NamaFileAwal
+* `$randompswd>$NamaFileAwal.txt` digunakan untuk menyimpan kode unik yang diciptakan pada nama file yang telah ditentukan
+
+
 ```bash
 #!/bin/bash
 
@@ -85,7 +96,13 @@ echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```
 
   c. Melakukan pengecekan argumen kembali seperti pekerjaan "b". Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan acuan yang sudah ditentukan untuk huruf uppercase dan lowercase lalu menyimpannya pada variabel NamaFileAkhir. Merename nama_file menjadi NamaFileAKhir.txt dan menampilkan nama file setelah dienkripsi
-  
+
+* `$(date -r $NamaFileAwal.txt +"%H")` digunakan untuk mengambil kapan jam file(parameter) dibuat
+* `hurufG=({A..Z})` dan `hurufk=({a..z})` untuk menyimpan array huruf uppercase dan lowercase
+* `$(($jam % 26))` dan `$(( $(( $jam + 25 )) % 26 ))` untuk melakukan operasi perhitungan pada alfabet ditambah jam sebagai penentu pola caesar cipher
+*  `echo "$NamaFileAwal" | tr [A-Za-z] ["$hurufGawal"-ZA-"$hurufGakhir""$hurufkawal"-za-"$hurufkakhir"]` enkripsi caesar cipher dengan pola yang ditentukan
+* `mv $NamaFileAwal.txt $NamaFileAkhir.txt` untuk merename nama menjadi hasil enkripsi
+
 ```bash
 #!/bin/bash
 
