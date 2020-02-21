@@ -4,41 +4,45 @@
 ```bash
 #!/bin/bash
 
+#-----------------------------Soal a------------------------------
 meow=$(awk -F $'\t' 'NR>1{arr[$13]+=$21}
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -1 | awk -F ',' '{print $2}' )
 echo -e "a.Bagian (Region) yang memiliki profit paling sedikit : $meow\n"
 
+#-----------------------------Soal b------------------------------
 mybro=($(awk -F $'\t' -v x=$meow 'NR>1{if ($13 == x) arr[$11]+=$21}
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -2 | awk -F ',' '{print $2}'))
 
 echo -e "b.2 Negara Bagian (State) yang memiliki \nprofit paling sedikit di Region $meow : \n${mybro[0]} dan ${mybro[1]}\n"
 
+#-----------------------------Soal c------------------------------
 echo -e "c.List 10 produk yang memiliki profit paling sedikit pada state\n${mybro[0]} dan ${mybro[1]} di Region $meow :"
 awk -F $'\t' -v x=$meow -v y=${mybro[0]} -v z=${mybro[1]} 'NR>1{if ( $13 == x && ( $11 == y || $11 == z)) arr[$17]+=$21}
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -10 | awk -F ',' '{print $2}'
 ```
 
 ### Penjelasan
-  a. Memanggil awk dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil awk kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
+  a. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
   
-  b. Memanggil awk dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dengan pengelompokan per State yang disimpan diarray arr. Mengeprint jumlah profit dari setiap state beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil kedua paling atasnya. Lalu memanggil awk kembali untuk menyimpan nama statenya saja yang memiliki profit paling kecil pertama dan kedua pada array mybro
+  b. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dengan pengelompokan per State yang disimpan diarray arr. Mengeprint jumlah profit dari setiap state beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil kedua paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama statenya saja yang memiliki profit paling kecil pertama dan kedua pada array `mybro`
   
-  c.Memanggil awk dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dan hanya memiliki state yang diperoleh dari pekerjaan "b" dengan pengelompokan per Product Line yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Product Line beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil sepuluh paling atas. Lalu memanggil awk kembali untuk mengeprint nama Product Linenya saja yang memiliki profit paling kecil pertama hingga kesepuluh
+  c.Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dan hanya memiliki state yang diperoleh dari pekerjaan "b" dengan pengelompokan per Product Line yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Product Line beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil sepuluh paling atas. Lalu memanggil `awk` kembali untuk mengeprint nama Product Linenya saja yang memiliki profit paling kecil pertama hingga kesepuluh
   
-* -v digunakan untuk memberi awk akses ke variabel yang meow dan mybro[] yang dialokasikan ke variabel x,y, dan z
+* `-v` digunakan untuk memberi awk akses ke variabel yang meow dan mybro[] yang dialokasikan ke variabel x,y, dan z
 * saat dilakukan awk kedua menggunakan separator koma sesuai dengan print dari awk pertama
-* LC_ALL=C digunakan agar sorting byte-wise dan nilai xxx.yy(ratusan koma) tidak dibaca sebagai xxxyy(puluhan ribuan)
+* `LC_ALL=C` digunakan agar sorting byte-wise dan nilai xxx.yy(ratusan koma) tidak dibaca sebagai xxxyy(puluhan ribuan)
 
 
 ## 2. Pengamanan Kode Random dengan Enkripsi Cipher
 
 ```bash
 #!/bin/bash
+#-----------------------------Soal a------------------------------
 randompswd=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 ; echo '')
 echo "kode unik tercipta : $randompswd"
 
 NamaFileAwal=${1%.*}
-
+#-----------------------------Soal b------------------------------
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
     NamaFileAwal=${NamaFileAwal//[[:digit:]]/}
