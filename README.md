@@ -37,7 +37,7 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
 * saat dilakukan `awk` kedua menggunakan separator koma sesuai dengan print dari awk pertama
 * `sort -n` digunakan agar sorting numerically dari bilangan terkecil
 * `LC_ALL=C` digunakan agar sorting byte-wise dan nilai xxx.yy(ratusan koma) tidak dibaca sebagai xxxyy(puluhan ribuan)
-* `head -x` digunakan agar hasil `awk` pertama ditampilkan sebanyak nilai x dari result paling atas(paling kecil)
+* `head -x` digunakan agar hasil `awk` pertama ditampilkkan sebanyak nilai x dari result paling atas(paling kecil)
 
 
 ## 2. Pengamanan Kode Random dengan Enkripsi Cipher
