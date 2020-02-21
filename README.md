@@ -135,10 +135,93 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ### Penjelasan
   d. Membaca argumen pertama (nama file terdekripsi) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
   
-## 3. Pembuatan Script untuk Mengunduh Gambar dengan Command Wget dan Penyimpanan File
+## 3. Pembuatan Script untuk Mengunduh Gambar 
+
+### soal3a.sh
+* Pembuatan script dengan Command `wget`.
+```
+iter=0
+num0=0
+while [[ $iter -ne 28 ]]
+do
+#echo "ping"
+wget -O pdkt_Kusuma_$(($iter+1)) https://loremflickr.com/320/240/cat -o temp.log
+if [[ $iter -eq $num0 ]]
+  then
+    grep -r "Location" temp.log > Location.log
+    cat temp.log > wget.log
+elif [[ $iter -gt $num0 ]]
+  then
+    grep -r "Location" temp.log >> Location.log
+    cat temp.log >> wget.log
+fi
+let iter++
+done
+```
 
 ### Penjelasan
-a. Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika ditemukan indikasi gambar yang diunduh sama dan serupa maka, gambar akan tet
-dengan nama "pdkt_kusuma_NO" (contoh: pdkt_kusuma_1, pdkt_kusuma_2,
-pdkt_kusuma_3) serta jangan lupa untuk menyimpan log messages wget kedalam
-sebuah file "wget.log".
+Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
+* `grep -r "Location" temp.log > Location.log`
+* `cat temp.log > wget.log
+Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
+* `grep -r "Location" temp.log >> Location.log` 
+* `cat temp.log >> wget.log`
+
+### soal3c.sh
+* Pembuatan script untuk menngeidentifikasi gambar yang identik.
+```
+readarray ab < loc.log
+
+max=29
+for a in {0..28}
+do
+  for((i=$((a+1)); i<$max; i=i+1))
+    do
+      nomerA=$(ls -1 kenangan | wc -l)
+      nomerB=$(ls -1 duplicate | wc -l)
+    if [[ "${ab[$a]}" = "${ab[$i]}" ]]
+      then
+      # echo pdkt_Kusuma_"$((a+1))"
+      # echo duplicate_"$nomerB"
+      mv pdkt_Kusuma_"$(($a+1))" duplicate/duplicate_"$(($nomerB+1))".jpeg
+      nomerB=$((nomerB + 1))
+      break
+
+    elif [[ $(($max-1)) -eq $i ]]
+      then
+      # echo pdkt_Kusuma_"$((a+1))"
+      # echo kenangan_"$nomerA"
+      mv pdkt_Kusuma_"$(($a+1))" kenangan/kenangan_"$(($nomerA+1))".jpeg
+      nomerA=$((nomerA + 1))
+    fi
+    done
+done
+
+cat wget.log > Backup.log.bak
+cat Location.log >> Backup.log.bak
+rm temp.log
+```
+
+### Penjelasan
+Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
+
+Hal yang diperlukan yaitu dengan memberi penentuan nomor yang terdapat di kenangan dan di duplicate.
+* Pada folder kenangan digunakan syntax
+`nomerA=$(ls -1 kenangan | wc -l)`
+* Pada folder duplicate digunakan syntax
+`nomerB=$(ls -1 duplicate | wc -l)`
+
+Berikutnya jika ditemukan indikasi gambar yang sama, maka gambar tersebut akan diberi format filname yang baru dengan format "duplicate_nomor".
+* Untuk penomoran pada duplicate dengan syntax
+` mv pdkt_Kusuma_"$(($a+1))" duplicate/duplicate_"$(($nomerB+1))".jpeg`
+  Pada syntax di atas nama_file akan diganti dengan format `duplicate` dengan diikuti nomor sesuai iterasi.
+* Untuk penomoran pada kenangan menggunakan syntax
+` mv pdkt_Kusuma_"$(($a+1))" kenangan/kenangan_"$(($nomerA+1))".jpeg`
+  Pada syntax di atas nama_file akan tetap sama denga format yang ada diikuti dengan penomoran sesuai iterasi.
+  
+Selanjutnya, untuk menyimpan isi dari `wget.log` dan location.log menjadi `Backup.log.bak` serta  menghapus `temp.log` dengan syntax
+```
+cat wget.log > Backup.log.bak
+cat Location.log >> Backup.log.bak
+rm temp.log
+```
