@@ -20,6 +20,8 @@ echo -e "c.List 10 produk yang memiliki profit paling sedikit pada state\n${mybr
 awk -F $'\t' -v x=$meow -v y=${mybro[0]} -v z=${mybro[1]} 'NR>1{if ( $13 == x && ( $11 == y || $11 == z)) arr[$17]+=$21}
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -10 | awk -F ',' '{print $2}'
 ```
+### soal1.sh
+* Cara menggunakan `bash soal1.sh `
 
 ### Penjelasan
   a. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
@@ -56,7 +58,8 @@ if [[ $NamaFileAwal =~ [0-9] ]]
 echo $randompswd>$NamaFileAwal.txt
 echo "file tercipta : $NamaFileAwal.txt"
 ```
-
+### soal2.sh
+* Cara menggunakan `bash soal2.sh "NamaFile".txt`
 ### Penjelasan
   a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
   
@@ -94,7 +97,9 @@ NamaFileAkhir=$(echo "$NamaFileAwal" | tr [A-Za-z] ["$hurufGawal"-ZA-"$hurufGakh
 mv $NamaFileAwal.txt $NamaFileAkhir.txt
 echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```
-
+### soal2_enkripsi.sh
+* Cara menggunakan `bash soal2_enkripsi.sh "NamaFile".txt`
+### Penjelasan
   c. Melakukan pengecekan argumen kembali seperti pekerjaan "b". Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan acuan yang sudah ditentukan untuk huruf uppercase dan lowercase lalu menyimpannya pada variabel NamaFileAkhir. Merename nama_file menjadi NamaFileAKhir.txt dan menampilkan nama file setelah dienkripsi
 
 * `$(date -r $NamaFileAwal.txt +"%H")` digunakan untuk mengambil kapan jam file(parameter) dibuat
@@ -125,8 +130,10 @@ NamaDecrypted=$(echo "$NamaCrypted" | tr ["$hurufGawal"-ZA-"$hurufGakhir""$huruf
 mv $NamaCrypted.txt $NamaDecrypted.txt
 echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ```
-
-  d. Membaca argumen pertama (nama_file) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
+### soal2_dekripsi.sh
+* Cara menggunakan `bash soal2_dekripsi.sh "NamaFileTerdekripsi".txt`
+### Penjelasan
+  d. Membaca argumen pertama (nama file terdekripsi) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
   
 ## 3. Pembuatan Script untuk Mengunduh Gambar dengan Command Wget dan Penyimpanan File
 
