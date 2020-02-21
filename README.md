@@ -169,10 +169,10 @@ Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
 
 ### soal3b
 Menggunakan command berikut untuk membuka crontab:
-`crontab -e`
+*`crontab -e`
 
 Melakukan input cronjob dengan command sebagai berikut:
-`5 6/8 * * 0-5 /home/fxkevink/no3.sh`
+*`5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
 
 ### soal3c.sh
 * Pembuatan script untuk menngeidentifikasi gambar yang identik.
