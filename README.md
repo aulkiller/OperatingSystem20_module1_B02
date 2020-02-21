@@ -23,7 +23,7 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
 ### soal1.sh
 * Cara menggunakan `bash soal1.sh `
 
-### Penjelasan
+### Penjelasan per poin jawaban soal
   a. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
   
   b. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dengan pengelompokan per State yang disimpan diarray arr. Mengeprint jumlah profit dari setiap state beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil kedua paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama statenya saja yang memiliki profit paling kecil pertama dan kedua pada array `mybro`
@@ -60,7 +60,7 @@ echo "file tercipta : $NamaFileAwal.txt"
 ```
 ### soal2.sh
 * Cara menggunakan `bash soal2.sh "NamaFile".txt`
-### Penjelasan
+### Penjelasan per poin jawaban soal
   a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
   
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
@@ -99,7 +99,7 @@ echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```
 ### soal2_enkripsi.sh
 * Cara menggunakan `bash soal2_enkripsi.sh "NamaFile".txt`
-### Penjelasan
+### Penjelasan per poin jawaban soal
   c. Melakukan pengecekan argumen kembali seperti pekerjaan "b". Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan acuan yang sudah ditentukan untuk huruf uppercase dan lowercase lalu menyimpannya pada variabel NamaFileAkhir. Merename nama_file menjadi NamaFileAKhir.txt dan menampilkan nama file setelah dienkripsi
 
 * `$(date -r $NamaFileAwal.txt +"%H")` digunakan untuk mengambil kapan jam file(parameter) dibuat
@@ -132,12 +132,12 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ```
 ### soal2_dekripsi.sh
 * Cara menggunakan `bash soal2_dekripsi.sh "NamaFileTerdekripsi".txt`
-### Penjelasan
+### Penjelasan per poin jawaban soal
   d. Membaca argumen pertama (nama file terdekripsi) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
   
 ## 3. Pembuatan Script untuk Mengunduh Gambar dengan Command Wget dan Penyimpanan File
 
-### Penjelasan
+### Penjelasan per poin jawaban soal
 a. Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika ditemukan indikasi gambar yang diunduh sama dan serupa maka, gambar akan tet
 dengan nama "pdkt_kusuma_NO" (contoh: pdkt_kusuma_1, pdkt_kusuma_2,
 pdkt_kusuma_3) serta jangan lupa untuk menyimpan log messages wget kedalam
