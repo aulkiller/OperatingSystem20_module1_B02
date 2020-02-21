@@ -21,7 +21,7 @@ awk -F $'\t' -v x=$meow -v y=${mybro[0]} -v z=${mybro[1]} 'NR>1{if ( $13 == x &&
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -10 | awk -F ',' '{print $2}'
 ```
 ### soal1.sh
-* Cara menggunakan `bash soal1.sh `
+* Cara menggunakan `bash soal1.sh ` dan pastikan file “Sample-Superstore.tsv” berada pada directory yang sama dengan script ini
 
 ### Penjelasan
   a. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
