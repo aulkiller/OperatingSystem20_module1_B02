@@ -1,4 +1,4 @@
-# SoalShiftSISOP20_modul1_B04
+# SoalShiftSISOP20_modul1_B02
 ## 1. Membuat Laporan dari “Sample-Superstore.tsv”.
 
 ```bash
