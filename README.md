@@ -1,8 +1,8 @@
 # SoalShiftSISOP20_modul1_B02
 ## Kelompok B02
-05111840000089 - Aulia Ihza Hendradi         - 
-05111840000161 - Kinassihurrabb Moralluhung
-05111840000162 - Fransiskus Xaverius Kevin Koesnadi
+* 05111840000089 - Aulia Ihza Hendradi         - 
+* 05111840000161 - Kinassihurrabb Moralluhung
+* 05111840000162 - Fransiskus Xaverius Kevin Koesnadi
 ### 1. Membuat Laporan dari “Sample-Superstore.tsv”.
 
 ```bash
