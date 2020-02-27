@@ -45,10 +45,38 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
 ```bash
 #!/bin/bash
 #-----------------------------Soal a------------------------------
-randompswd=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28 ; echo '')
+randompswd1=$(head /dev/urandom | tr -dc A-Z | head -c 1 ; echo '')
+randompswd2=$(head /dev/urandom | tr -dc a-z | head -c 1 ; echo '')
+randompswd3=$(head /dev/urandom | tr -dc 0-9 | head -c 1 ; echo '')
+randompswd4=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 25 ; echo '')
+
+
+case "$((RANDOM % 6))" in
+  "0")
+  randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"
+  ;;
+  "1")
+  randompswd="$randompswd1$randompswd3$randompswd2$randompswd4"
+  ;;
+  "2")
+  randompswd="$randompswd3$randompswd2$randompswd1$randompswd4"
+  ;;
+  "3")
+  randompswd="$randompswd3$randompswd1$randompswd2$randompswd4"
+  ;;
+  "4")
+  randompswd="$randompswd2$randompswd3$randompswd1$randompswd4"
+  ;;
+  "5")
+  randompswd="$randompswd2$randompswd1$randompswd3$randompswd4"
+  ;;
+esac
+
+
 echo "kode unik tercipta : $randompswd"
 
-NamaFileAwal=${1%.*}
+NamaFileAwal=${1%%.*}
+
 #-----------------------------Soal b------------------------------
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
@@ -57,11 +85,100 @@ if [[ $NamaFileAwal =~ [0-9] ]]
 
 echo $randompswd>$NamaFileAwal.txt
 echo "file tercipta : $NamaFileAwal.txt"
+
+#-----------------------------Soal c------------------------------
+#!/bin/bash
+
+NamaCrypted=${1%.*}
+
+jam=$(date -r $1 +"%H")
+
+hurufG=({A..Z})
+hurufk=({a..z})
+
+hurufGawal=${hurufG[ $(($jam % 26)) ]}
+hurufGakhir=${hurufG[ $(( $(( $jam + 25 )) % 26 ))]}
+hurufkawal=${hurufk[($jam%26)]}
+hurufkakhir=${hurufk[(25+$jam)%26]}
+
+
+NamaDecrypted=$(echo "$NamaCrypted" | tr ["$hurufGawal"-ZA-"$hurufGakhir""$hurufkawal"-za-"$hurufkakhir"] [A-Za-z])
+# echo "$NamaCrypted" | tr '[A-Za-z]' '["$hurufGawal"-ZA-"$hurufGakhir""$hurufkawal"-za-"$hurufkakhir"]'
+
+mv $NamaCrypted.txt $NamaDecrypted.txt
+echo "file terdekripsi menjadi : $NamaDecrypted.txt"
+~                                                       
 ```
 ### soal2.sh
 * Cara menggunakan `bash soal2.sh "NamaFile".txt`
 ### Penjelasan
-  a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user
+  a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user. Kombinasi password yang dihasilkan memiliki kemungkinan tata letak antara huruf dan angka semisal `Ab0` maka kemungkinan yang dihasilkan akan memiliki kombinasi `Ab0`,`A0b`,`bA0`,`b0A`,`0Ab`,`0bA` sehingga terdapat 6 kemungkinan, maka perlu dituliskan syntax
+  
+  ```
+  #!/bin/bash
+randompswd1=$(head /dev/urandom | tr -dc A-Z | head -c 1 ; echo '')
+randompswd2=$(head /dev/urandom | tr -dc a-z | head -c 1 ; echo '')
+randompswd3=$(head /dev/urandom | tr -dc 0-9 | head -c 1 ; echo '')
+randompswd4=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 25 ; echo '')
+
+
+case "$((RANDOM % 6))" in
+  "0")
+  randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"
+  ;;
+  "1")
+  randompswd="$randompswd1$randompswd3$randompswd2$randompswd4"
+  ;;
+  "2")
+  randompswd="$randompswd3$randompswd2$randompswd1$randompswd4"
+  ;;
+  "3")
+  randompswd="$randompswd3$randompswd1$randompswd2$randompswd4"
+  ;;
+  "4")
+  randompswd="$randompswd2$randompswd3$randompswd1$randompswd4"
+  ;;
+  "5")
+  randompswd="$randompswd2$randompswd1$randompswd3$randompswd4"
+  ;;
+esac
+
+
+echo "kode unik tercipta : $randompswd"
+
+  ```
+  * `randompswd1`, digunakan untuk men-generate huruf kapital A-Z
+  * `randompswd2`, digunakan untuk men-generate huruf kecil a-z
+  * `randompswd3`, digunakan untuk men-generate angka 0-9
+  * `randompswd4`, digunakan sebagai tempat mengabungkan setiap karakter yang dihasilkan
+  
+  ```
+  case "$((RANDOM % 6))" in
+  "0")
+  randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"
+  ;;
+  "1")
+  randompswd="$randompswd1$randompswd3$randompswd2$randompswd4"
+  ;;
+  "2")
+  randompswd="$randompswd3$randompswd2$randompswd1$randompswd4"
+  ;;
+  "3")
+  randompswd="$randompswd3$randompswd1$randompswd2$randompswd4"
+  ;;
+  "4")
+  randompswd="$randompswd2$randompswd3$randompswd1$randompswd4"
+  ;;
+  "5")
+  randompswd="$randompswd2$randompswd1$randompswd3$randompswd4"
+  ;;
+esac
+
+  ```
+  * `case "$((RANDOM % 6))" in` 
+  generate password secara random dengan banyaknya 6 kemungkinan. Kemungkinan sebanyak enam didapatkan berdasarkan pada contoh yang telah disebutkan di atas.
+  * `"0") randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"`
+  contoh kemungkinan pertama (iterasi ke-nol) tersusun secara berututan atas huruf kapital, huruf kecil, dan angka dalam `randompswd4` dan tersusun secara random. Hal ini akan berlaku pada iterasi berikutnya (sampai iterasi ke-5)
   
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
@@ -140,43 +257,6 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ### soal3a.sh
 * Pembuatan script dengan Command `wget`.
 ```
-iter=0
-num0=0
-while [[ $iter -ne 28 ]]
-do
-#echo "ping"
-wget -O pdkt_Kusuma_$(($iter+1)) https://loremflickr.com/320/240/cat -o temp.log
-if [[ $iter -eq $num0 ]]
-  then
-    grep -r "Location" temp.log > Location.log
-    cat temp.log > wget.log
-elif [[ $iter -gt $num0 ]]
-  then
-    grep -r "Location" temp.log >> Location.log
-    cat temp.log >> wget.log
-fi
-let iter++
-done
-```
-
-### Penjelasan
-Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
-* `grep -r "Location" temp.log > Location.log`
-* `cat temp.log > wget.log
-Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
-* `grep -r "Location" temp.log >> Location.log` 
-* `cat temp.log >> wget.log`
-
-### soal3b
-Menggunakan command berikut untuk membuka crontab:
-* `crontab -e`
-
-Melakukan input cronjob dengan command sebagai berikut:
-* `5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
-
-### soal3c.sh
-* Pembuatan script untuk menngeidentifikasi gambar yang identik.
-```
 #!/bin/bash
 
 cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
@@ -200,6 +280,30 @@ let iter++
 done
 
 readarray ab < Location.log
+
+```
+
+### Penjelasan
+Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
+* `grep -r "Location" temp.log > Location.log`
+* `cat temp.log > wget.log
+Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
+* `grep -r "Location" temp.log >> Location.log` 
+* `cat temp.log >> wget.log`
+
+### soal3b
+Menggunakan command berikut untuk membuka crontab:
+* `crontab -e`
+
+Melakukan input cronjob dengan command sebagai berikut:
+* `5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
+
+### soal3c.sh
+* Pembuatan script untuk menngeidentifikasi gambar yang identik.
+```
+#!/bin/bash
+
+cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
 
 max=29
 for a in {0..28}
