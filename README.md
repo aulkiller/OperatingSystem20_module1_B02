@@ -177,7 +177,29 @@ Melakukan input cronjob dengan command sebagai berikut:
 ### soal3c.sh
 * Pembuatan script untuk menngeidentifikasi gambar yang identik.
 ```
-readarray ab < loc.log
+#!/bin/bash
+
+cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
+
+iter=0
+num0=0
+while [[ $iter -ne 28 ]]
+do
+#echo "ping"
+wget -O pdkt_Kusuma_$(($iter+1)) https://loremflickr.com/320/240/cat -o temp.log
+if [[ $iter -eq $num0 ]]
+  then
+    grep -r "Location" temp.log > Location.log
+    cat temp.log > wget.log
+elif [[ $iter -gt $num0 ]]
+  then
+    grep -r "Location" temp.log >> Location.log
+    cat temp.log >> wget.log
+fi
+let iter++
+done
+
+readarray ab < Location.log
 
 max=29
 for a in {0..28}
@@ -207,6 +229,7 @@ done
 cat wget.log > Backup.log.bak
 cat Location.log >> Backup.log.bak
 rm temp.log
+                                                              52,1          Bot
 ```
 
 ### Penjelasan
