@@ -147,9 +147,6 @@ case "$((RANDOM % 6))" in
   ;;
 esac
 
-
-echo "kode unik tercipta : $randompswd"
-
   ```
   * `randompswd1`, digunakan untuk men-generate huruf kapital A-Z
   * `randompswd2`, digunakan untuk men-generate huruf kecil a-z
@@ -178,16 +175,20 @@ echo "kode unik tercipta : $randompswd"
   ;;
 esac
 
+echo "kode unik tercipta : $randompswd"
+
+NamaFileAwal=${1%%.*}
   ```
   * `case "$((RANDOM % 6))" in` 
   generate password secara random dengan banyaknya 6 kemungkinan. Kemungkinan sebanyak enam didapatkan berdasarkan pada contoh yang telah disebutkan di atas.
   * `"0") randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"`
   contoh kemungkinan pertama (iterasi ke-nol) tersusun secara berututan atas huruf kapital, huruf kecil, dan angka dalam `randompswd4` dan tersusun secara random. Hal ini akan berlaku pada iterasi berikutnya (sampai iterasi ke-5)
+  * `NamaFileAwal=${1%%.*}`, digunakan untuk membuang format file dari argumen pertama  (setelah ditemukan tanda titik `.`)
   
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
 
-* `${1%%.*}` digunakan untuk membuang format file dari argumen pertama (setelah ditemukan tanda titik `.`)
+* `${1%.*}` digunakan untuk membuang format file dari argumen pertama
 * `NamaFileAwal//[[:digit:]]/` digunakan untuk membuang setiap digit dari NamaFileAwal
 * `$randompswd>$NamaFileAwal.txt` digunakan untuk menyimpan kode unik yang diciptakan pada nama file yang telah ditentukan
 
@@ -195,7 +196,7 @@ esac
 ```bash
 #!/bin/bash
 
-NamaFileAwal=${1%%.*}
+NamaFileAwal=${1%.*}
 
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
@@ -232,7 +233,7 @@ echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```bash
 #!/bin/bash
 
-NamaCrypted=${1%%.*}
+NamaCrypted=${1%.*}
 
 jam=$(date -r $1 +"%H")
 
