@@ -1,5 +1,9 @@
 # SoalShiftSISOP20_modul1_B02
-## 1. Membuat Laporan dari “Sample-Superstore.tsv”.
+## Kelompok B02
+05111840000089 - Aulia Ihza Hendradi         - 
+05111840000161 - Kinassihurrabb Moralluhung
+05111840000162 - Fransiskus Xaverius Kevin Koesnadi
+### 1. Membuat Laporan dari “Sample-Superstore.tsv”.
 
 ```bash
 #!/bin/bash
@@ -20,10 +24,10 @@ echo -e "c.List 10 produk yang memiliki profit paling sedikit pada state\n${mybr
 awk -F $'\t' -v x=$meow -v y=${mybro[0]} -v z=${mybro[1]} 'NR>1{if ( $13 == x && ( $11 == y || $11 == z)) arr[$17]+=$21}
 END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n | head -10 | awk -F ',' '{print $2}'
 ```
-### soal1.sh
+#### soal1.sh
 * Cara menggunakan `bash soal1.sh ` dan pastikan file “Sample-Superstore.tsv” berada pada directory yang sama dengan script ini
 
-### Penjelasan
+#### Penjelasan
   a. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dengan pengelompokan per Region yang disimpan diarray arr. Mengeprint jumlah profit dari setiap Region beserta regionnya kembali untuk disort dari yang terrendah dan diambil hasil paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama regionnya saja yang memiliki profit paling kecil pada variabel meow
   
   b. Memanggil `awk` dengan separator tab dan data yang dilihat dimulai dari row 2 dan hanya memiliki Region yang diperoleh dari pekerjaan "a" dengan pengelompokan per State yang disimpan diarray arr. Mengeprint jumlah profit dari setiap state beserta statenya kembali untuk disort dari yang terrendah dan diambil hasil kedua paling atasnya. Lalu memanggil `awk` kembali untuk menyimpan nama statenya saja yang memiliki profit paling kecil pertama dan kedua pada array `mybro`
@@ -40,7 +44,7 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
 * `head -x` digunakan agar hasil `awk` pertama ditampilkkan sebanyak nilai x dari result paling atas(paling kecil)
 
 
-## 2. Pengamanan Kode Random dengan Enkripsi Cipher
+### 2. Pengamanan Kode Random dengan Enkripsi Cipher
 
 ```bash
 #!/bin/bash
@@ -109,9 +113,9 @@ mv $NamaCrypted.txt $NamaDecrypted.txt
 echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ~                                                       
 ```
-### soal2.sh
+#### soal2.sh
 * Cara menggunakan `bash soal2.sh "NamaFile".txt`
-### Penjelasan
+#### Penjelasan
   a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user. Kombinasi password yang dihasilkan memiliki kemungkinan tata letak antara huruf dan angka semisal `Ab0` maka kemungkinan yang dihasilkan akan memiliki kombinasi `Ab0`,`A0b`,`bA0`,`b0A`,`0Ab`,`0bA` sehingga terdapat 6 kemungkinan, maka perlu dituliskan syntax
   
   ```
@@ -214,9 +218,9 @@ NamaFileAkhir=$(echo "$NamaFileAwal" | tr [A-Za-z] ["$hurufGawal"-ZA-"$hurufGakh
 mv $NamaFileAwal.txt $NamaFileAkhir.txt
 echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```
-### soal2_enkripsi.sh
+#### soal2_enkripsi.sh
 * Cara menggunakan `bash soal2_enkripsi.sh "NamaFile".txt`
-### Penjelasan
+#### Penjelasan
   c. Melakukan pengecekan argumen kembali seperti pekerjaan "b". Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan acuan yang sudah ditentukan untuk huruf uppercase dan lowercase lalu menyimpannya pada variabel NamaFileAkhir. Merename nama_file menjadi NamaFileAKhir.txt dan menampilkan nama file setelah dienkripsi
 
 * `$(date -r $NamaFileAwal.txt +"%H")` digunakan untuk mengambil kapan jam file(parameter) dibuat
@@ -247,14 +251,14 @@ NamaDecrypted=$(echo "$NamaCrypted" | tr ["$hurufGawal"-ZA-"$hurufGakhir""$huruf
 mv $NamaCrypted.txt $NamaDecrypted.txt
 echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ```
-### soal2_dekripsi.sh
+#### soal2_dekripsi.sh
 * Cara menggunakan `bash soal2_dekripsi.sh "NamaFileTerdekripsi".txt`
-### Penjelasan
+#### Penjelasan
   d. Membaca argumen pertama (nama file terdekripsi) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
   
-## 3. Pembuatan Script untuk Mengunduh Gambar 
+### 3. Pembuatan Script untuk Mengunduh Gambar 
 
-### soal3a.sh
+#### soal3a.sh
 * Pembuatan script dengan Command `wget`.
 ```
 #!/bin/bash
@@ -283,7 +287,7 @@ readarray ab < Location.log
 
 ```
 
-### Penjelasan
+#### Penjelasan
 Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
 * `grep -r "Location" temp.log > Location.log`
 * `cat temp.log > wget.log
@@ -291,14 +295,14 @@ Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
 * `grep -r "Location" temp.log >> Location.log` 
 * `cat temp.log >> wget.log`
 
-### soal3b
+#### soal3b
 Menggunakan command berikut untuk membuka crontab:
 * `crontab -e`
 
 Melakukan input cronjob dengan command sebagai berikut:
 * `5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
 
-### soal3c.sh
+#### soal3c.sh
 * Pembuatan script untuk menngeidentifikasi gambar yang identik.
 ```
 #!/bin/bash
@@ -336,7 +340,7 @@ rm temp.log
                                                               52,1          Bot
 ```
 
-### Penjelasan
+#### Penjelasan
 Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
 
 Hal yang diperlukan yaitu dengan memberi penentuan nomor yang terdapat di kenangan dan di duplicate.
