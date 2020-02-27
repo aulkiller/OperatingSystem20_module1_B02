@@ -183,7 +183,7 @@ esac
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
 
-* `${1%.*}` digunakan untuk membuang format file dari argumen pertama
+* `${1%%.*}` digunakan untuk membuang format file dari argumen pertama (setelah ditemukan tanda titik `.`)
 * `NamaFileAwal//[[:digit:]]/` digunakan untuk membuang setiap digit dari NamaFileAwal
 * `$randompswd>$NamaFileAwal.txt` digunakan untuk menyimpan kode unik yang diciptakan pada nama file yang telah ditentukan
 
@@ -191,7 +191,7 @@ esac
 ```bash
 #!/bin/bash
 
-NamaFileAwal=${1%.*}
+NamaFileAwal=${1%%.*}
 
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
@@ -228,7 +228,7 @@ echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```bash
 #!/bin/bash
 
-NamaCrypted=${1%.*}
+NamaCrypted=${1%%.*}
 
 jam=$(date -r $1 +"%H")
 
