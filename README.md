@@ -292,7 +292,7 @@ readarray ab < Location.log
 ```
 
 #### Penjelasan
-Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
+Menggunakan `cd` agar mengemount dimana script itu disimpan sebelum semua isi dibawah line tersebut dijalankan di crontab.Menggunakan command `wget` sebagai pengambikan gambar dari url link yang tersedia lalu gambar yang tersedia pada link akan diunduh  dengan menggunakan iterasi utuk pemeriksaan gambar yang telah diunduh. Gambar yag sudah diunduh dan log messages yang ada akan disimpan ke dalam sebuah file `wget.log`. Pada saat pengunduhan, file yang diterima akan dimasukkan ke dalam lokasi (folder kenalan) dan dengan menghasilkan nama file yang baru (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3). Jika belum terdapat file yang baru maka menggunakan syntax
 * `grep -r "Location" temp.log > Location.log`
 * `cat temp.log > wget.log
 Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
@@ -350,7 +350,7 @@ rm temp.log
 ```
 
 #### Penjelasan
-Menggunakan cd agar mengemount dimana script itu disimpan sebelum semua isi dibawah line tersebut dijalankan di crontab.Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
+Menggunakan `cd` dengan fungsi yang sudah dijelaskan sebelumnya.Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
 
 Hal yang diperlukan yaitu dengan memberi penentuan nomor yang terdapat di kenangan dan di duplicate.
 * Pada folder kenangan digunakan syntax
