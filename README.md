@@ -151,7 +151,8 @@ esac
   * `randompswd1`, digunakan untuk men-generate huruf kapital A-Z
   * `randompswd2`, digunakan untuk men-generate huruf kecil a-z
   * `randompswd3`, digunakan untuk men-generate angka 0-9
-  * `randompswd4`, digunakan sebagai tempat mengabungkan setiap karakter yang dihasilkan
+  * `randompswd4`, digunakan untuk men-generate 25 karakter sisa dengan filter A-Z,a-z, dan 0-9
+  * `randompswd`,  digunakan sebagai tempat mengabungkan setiap karakter yang dihasilkan
   
   ```
   case "$((RANDOM % 6))" in
@@ -265,6 +266,8 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 #!/bin/bash
 
 cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
+# fxkevink harus diganti dengan nama user yang sedang menjalankan script
+# directory documents bisa digantikan dengan folder lain dimana keseluruhan folder soal disimpan
 
 iter=0
 num0=0
@@ -303,7 +306,7 @@ Menggunakan command berikut untuk mengganti permission pada file soal3.sh menjad
 Menggunakan command berikut untuk membuka crontab:
 * `crontab -e`
 
-Melakukan input cronjob dengan command sebagai berikut:
+Melakukan input cronjob dengan command sebagai berikut: ( nama user dan directory diganti sesuai dengan user yang menjalankan )
 * `5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
 
 #### soal3c.sh
@@ -312,6 +315,8 @@ Melakukan input cronjob dengan command sebagai berikut:
 #!/bin/bash
 
 cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
+# fxkevink harus diganti dengan nama user yang sedang menjalankan script
+# directory documents bisa digantikan dengan folder lain dimana keseluruhan folder soal disimpan
 
 max=29
 for a in {0..28}
@@ -345,7 +350,7 @@ rm temp.log
 ```
 
 #### Penjelasan
-Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
+Menggunakan cd agar mengemount dimana script itu disimpan sebelum semua isi dibawah line tersebut dijalankan di crontab.Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
 
 Hal yang diperlukan yaitu dengan memberi penentuan nomor yang terdapat di kenangan dan di duplicate.
 * Pada folder kenangan digunakan syntax
