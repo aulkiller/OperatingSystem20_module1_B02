@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NamaFileAwal=${1%.*}
+NamaFileAwal=${1%%.*}
 
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
