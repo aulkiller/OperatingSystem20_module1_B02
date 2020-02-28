@@ -116,7 +116,7 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 #### soal2.sh
 * Cara menggunakan `bash soal2.sh "NamaFile".txt`
 #### Penjelasan
-  a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 28` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 28 letter count. Memberikan display berupa kode unik yang tercipta pada user. Kombinasi password yang dihasilkan memiliki kemungkinan tata letak antara huruf dan angka semisal `Ab0` maka kemungkinan yang dihasilkan akan memiliki kombinasi `Ab0`,`A0b`,`bA0`,`b0A`,`0Ab`,`0bA` sehingga terdapat 6 kemungkinan, maka perlu dituliskan syntax
+  a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 25` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 25 letter count setelah terjadi `head /dev/urandom | tr -dc A-Z | head -c 1 `, `head /dev/urandom | tr -dc a-z | head -c 1`, dan `head /dev/urandom | tr -dc 0-9 | head -c 1` untuk memastikan pada 3 karakter awal setidaknya terdapat satu huruf kecil,satu huruf besar, dan satu angka. Memberikan display berupa kode unik yang tercipta pada user. Kombinasi password yang dihasilkan memiliki kemungkinan tata letak antara huruf dan angka pada 3 karakter awal yang diacak semisal `Ab0` maka kemungkinan yang dihasilkan akan memiliki kombinasi `Ab0`,`A0b`,`bA0`,`b0A`,`0Ab`,`0bA` sehingga terdapat 6 kemungkinan, maka perlu dituliskan syntax case untuk setiap value random yang dimodulo 6.
   
   ```
   #!/bin/bash
@@ -188,7 +188,7 @@ NamaFileAwal=${1%%.*}
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
 
-* `${1%.*}` digunakan untuk membuang format file dari argumen pertama
+* `${1%%.*}` digunakan untuk membuang format file dari argumen pertama
 * `NamaFileAwal//[[:digit:]]/` digunakan untuk membuang setiap digit dari NamaFileAwal
 * `$randompswd>$NamaFileAwal.txt` digunakan untuk menyimpan kode unik yang diciptakan pada nama file yang telah ditentukan
 
@@ -196,7 +196,7 @@ NamaFileAwal=${1%%.*}
 ```bash
 #!/bin/bash
 
-NamaFileAwal=${1%.*}
+NamaFileAwal=${1%%.*}
 
 if [[ $NamaFileAwal =~ [0-9] ]]
   then
@@ -233,7 +233,7 @@ echo "file terenkripsi menjadi : $NamaFileAkhir.txt"
 ```bash
 #!/bin/bash
 
-NamaCrypted=${1%.*}
+NamaCrypted=${1%%.*}
 
 jam=$(date -r $1 +"%H")
 
@@ -297,6 +297,9 @@ Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
 * `cat temp.log >> wget.log`
 
 #### soal3b
+Menggunakan command berikut untuk mengganti permission pada file soal3.sh menjadi rwxrwxrwx sehingga bisa diakses siapapun
+* `chmod 777 soal3.sh`
+
 Menggunakan command berikut untuk membuka crontab:
 * `crontab -e`
 
