@@ -1,7 +1,7 @@
 # SoalShiftSISOP20_modul1_B02
 ## Kelompok B02
 * 05111840000089 - Aulia Ihza Hendradi 
-* 05111840000161 - Kinassihurrabb Moralluhung
+* 05111840000161 - Kinasihurrabb Moralluhung
 * 05111840000162 - Fransiskus Xaverius Kevin Koesnadi
 ### 1. Membuat Laporan dari “Sample-Superstore.tsv”.
 
@@ -348,7 +348,6 @@ cat Location.log >> Backup.log.bak
 rm temp.log
 
 ```
-
 #### Penjelasan
 Menggunakan `cd` dengan fungsi yang sudah dijelaskan sebelumnya.Menggunakan command `wget.log` untuk membuat `location.log`. Mengidentifikasi gambar yang identik dari keseluruhan gambar yang terunduh pada script yang digunakan sebelumnya. Bila terindikasi gambar yang identik dengan gambar sebelumnya, maka gambar yang identik dipindahkan ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi `.log.bak`.
 
