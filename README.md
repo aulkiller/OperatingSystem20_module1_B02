@@ -346,7 +346,7 @@ done
 cat wget.log > Backup.log.bak
 cat Location.log >> Backup.log.bak
 rm temp.log
-                                                              52,1          Bot
+
 ```
 
 #### Penjelasan
