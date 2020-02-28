@@ -1,3 +1,9 @@
+#!/bin/bash
+
+cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
+# fxkevink harus diganti dengan nama user yang sedang menjalankan script
+# directory documents bisa digantikan dengan folder lain dimana keseluruhan folder soal disimpan
+
 iter=0
 num0=0
 while [[ $iter -ne 28 ]]
