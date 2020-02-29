@@ -118,8 +118,8 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 #### Penjelasan
   a.Menggunakan `head /dev/urandom | tr -dc A-Za-z0-9 | head -c 25` untuk menggenerate kode unik yang terdapat alphabetical baik lower maupun upper case beserta angka dengan panjang 25 letter count setelah terjadi `head /dev/urandom | tr -dc A-Z | head -c 1 `, `head /dev/urandom | tr -dc a-z | head -c 1`, dan `head /dev/urandom | tr -dc 0-9 | head -c 1` untuk memastikan pada 3 karakter awal setidaknya terdapat satu huruf kecil,satu huruf besar, dan satu angka. Memberikan display berupa kode unik yang tercipta pada user. Kombinasi password yang dihasilkan memiliki kemungkinan tata letak antara huruf dan angka pada 3 karakter awal yang diacak semisal `Ab0` maka kemungkinan yang dihasilkan akan memiliki kombinasi `Ab0`,`A0b`,`bA0`,`b0A`,`0Ab`,`0bA` sehingga terdapat 6 kemungkinan, maka perlu dituliskan syntax case untuk setiap value random yang dimodulo 6.
   
-  ```
-  #!/bin/bash
+```bash
+#!/bin/bash
 randompswd1=$(head /dev/urandom | tr -dc A-Z | head -c 1 ; echo '')
 randompswd2=$(head /dev/urandom | tr -dc a-z | head -c 1 ; echo '')
 randompswd3=$(head /dev/urandom | tr -dc 0-9 | head -c 1 ; echo '')
@@ -147,15 +147,16 @@ case "$((RANDOM % 6))" in
   ;;
 esac
 
-  ```
+```
+
   * `randompswd1`, digunakan untuk men-generate huruf kapital A-Z
   * `randompswd2`, digunakan untuk men-generate huruf kecil a-z
   * `randompswd3`, digunakan untuk men-generate angka 0-9
-  * `randompswd4`, digunakan untuk men-generate 25 karakter sisa dengan filter A-Z,a-z, dan 0-9
+  * `randompswd4`, digunakan untuk men-generate 25 karakter sisa dengan filter A-Z, a-z, dan 0-9
   * `randompswd`,  digunakan sebagai tempat mengabungkan setiap karakter yang dihasilkan
   
-  ```
-  case "$((RANDOM % 6))" in
+```bash
+case "$((RANDOM % 6))" in
   "0")
   randompswd="$randompswd1$randompswd2$randompswd3$randompswd4"
   ;;
@@ -300,13 +301,13 @@ Jika sudah ada, maka akan diappend ke file yang sudah ada dengan syntax
 * `cat temp.log >> wget.log`
 
 #### soal3b
-Menggunakan command berikut untuk mengganti permission pada file soal3.sh menjadi rwxrwxrwx sehingga bisa diakses siapapun
+Menggunakan command berikut untuk mengganti permission pada file soal3.sh menjadi rwxrwxrwx (read write execute) sehingga bisa diakses siapapun
 * `chmod 777 soal3.sh`
 
 Menggunakan command berikut untuk membuka crontab:
 * `crontab -e`
 
-Melakukan input cronjob dengan command sebagai berikut: ( nama user dan directory diganti sesuai dengan user yang menjalankan )
+Melakukan input cronjob dengan command sebagai berikut: (nama user dan directory diganti sesuai dengan user yang menjalankan)
 * `5 6/8 * * 0-5 /home/fxkevink/soal3.sh`
 
 #### soal3c.sh
@@ -363,7 +364,7 @@ Berikutnya jika ditemukan indikasi gambar yang sama, maka gambar tersebut akan d
   Pada syntax di atas nama_file akan diganti dengan format `duplicate` dengan diikuti nomor sesuai iterasi.
 * Untuk penomoran pada kenangan menggunakan syntax
 ` mv pdkt_Kusuma_"$(($a+1))" kenangan/kenangan_"$(($nomerA+1))".jpeg`
-  Pada syntax di atas nama_file akan tetap sama denga format yang ada diikuti dengan penomoran sesuai iterasi.
+  Pada syntax di atas nama_file akan tetap sama dengan format yang ada diikuti dengan penomoran sesuai iterasi.
   
 Selanjutnya, untuk menyimpan isi dari `wget.log` dan location.log menjadi `Backup.log.bak` serta  menghapus `temp.log` dengan syntax
 ```
