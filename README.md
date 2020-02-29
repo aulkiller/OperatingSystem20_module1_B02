@@ -43,6 +43,8 @@ END {for (i in arr) print arr[i] "," i}' Sample-Superstore.tsv| LC_ALL=C sort -n
 * `LC_ALL=C` digunakan agar sorting byte-wise dan nilai xxx.yy(ratusan koma) tidak dibaca sebagai xxxyy(puluhan ribuan)
 * `head -x` digunakan agar hasil `awk` pertama ditampilkkan sebanyak nilai x dari result paling atas(paling kecil)
 
+Output yang dihasilkan:
+![Screenshot from 2020-02-29 14-56-27](https://user-images.githubusercontent.com/58078219/75604327-ee5b1000-5b09-11ea-9924-6ad01b02517a.png)
 
 ### 2. Pengamanan Kode Random dengan Enkripsi Cipher
 
@@ -187,6 +189,9 @@ NamaFileAwal=${1%%.*}
   contoh kemungkinan pertama (iterasi ke-nol) tersusun secara berututan atas huruf kapital, huruf kecil, dan angka dalam `randompswd4` dan tersusun secara random. Hal ini akan berlaku pada iterasi berikutnya (sampai iterasi ke-5)
   * `NamaFileAwal=${1%%.*}`, digunakan untuk membuang format file dari argumen pertama  (setelah ditemukan tanda titik `.`)
   
+  Output yang dihasilkan:
+  ![Screenshot from 2020-02-29 15-23-05](https://user-images.githubusercontent.com/58078219/75604332-fe72ef80-5b09-11ea-9b28-f7bd4724788f.png)
+  
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
 
@@ -254,10 +259,16 @@ NamaDecrypted=$(echo "$NamaCrypted" | tr ["$hurufGawal"-ZA-"$hurufGakhir""$huruf
 mv $NamaCrypted.txt $NamaDecrypted.txt
 echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 ```
+Output yang dihasilkan:
+![Screenshot from 2020-02-29 15-24-10](https://user-images.githubusercontent.com/58078219/75604334-ffa41c80-5b09-11ea-8ef6-880cbd101168.png)
+
 #### soal2_dekripsi.sh
 * Cara menggunakan `bash soal2_dekripsi.sh "NamaFileTerdekripsi".txt`
 #### Penjelasan
   d. Membaca argumen pertama (nama file terdekripsi) tanpa format file dibelakangnya lalu disimpan pada variabel NamaCrypted. Lalu menyimpan jam file tersebut dibuat pada variabel jam. Menyimpan alfabet uppercase dan lowercase pada array yang berbeda lalu melakukan operasi penambahan jam pada huruf acuan awal dan akhir yang akan digunakan pada caesar cipher. Menggunakan caesar cipher dengan format `tr x y` yang dibalik menjadi `tr y x`. Merename nama file yang terenkripsi menjadi NameDecrypted.txt dan menampilkan nama file setelah didekripsi
+  
+Output yang dihasilkan:
+![Screenshot from 2020-02-29 15-26-22](https://user-images.githubusercontent.com/58078219/75604335-02067680-5b0a-11ea-8198-9feb7998eaf7.png)
   
 ### 3. Pembuatan Script untuk Mengunduh Gambar 
 
@@ -372,3 +383,13 @@ cat wget.log > Backup.log.bak
 cat Location.log >> Backup.log.bak
 rm temp.log
 ```
+Output yang dihasilkan:
+![Screenshot from 2020-02-29 15-31-02](https://user-images.githubusercontent.com/58078219/75604339-0599fd80-5b0a-11ea-912e-4558bbe6f761.png)
+![Screenshot from 2020-02-29 15-31-24](https://user-images.githubusercontent.com/58078219/75604340-06cb2a80-5b0a-11ea-896e-e6636d0d4a6b.png)
+
+##### Kendala yang dihadapi pada saat pengerjaan
+###### Soal 2.a.
+Terjadi kesalahpahaman ketika menegetahui soal yang diberikan. Pada mulanya penyelesaian yang dilakukan hanya perlu melihat tanda titik yang terakhir `.` yang terakhir dibuang, sehingga sempat dihasilkan suatu output yang tidak sesuai semisal terdapat file bernama `abc.txt.txt`, maka seharusnya output yang keluar brupa `abc.txt`.
+
+###### Soal 1
+Mengalami kebingungan karena 
