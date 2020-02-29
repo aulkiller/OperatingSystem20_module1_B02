@@ -263,7 +263,7 @@ echo "file terdekripsi menjadi : $NamaDecrypted.txt"
 
 #### soal3a.sh
 * Pembuatan script dengan Command `wget`.
-```
+```bash
 #!/bin/bash
 
 cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
@@ -312,7 +312,7 @@ Melakukan input cronjob dengan command sebagai berikut: (nama user dan directory
 
 #### soal3c.sh
 * Pembuatan script untuk menngeidentifikasi gambar yang identik.
-```
+```bash
 #!/bin/bash
 
 cd /home/fxkevink/Documents/SoalShiftSISOP20_modul1_B02-master/soal3
@@ -367,7 +367,7 @@ Berikutnya jika ditemukan indikasi gambar yang sama, maka gambar tersebut akan d
   Pada syntax di atas nama_file akan tetap sama dengan format yang ada diikuti dengan penomoran sesuai iterasi.
   
 Selanjutnya, untuk menyimpan isi dari `wget.log` dan location.log menjadi `Backup.log.bak` serta  menghapus `temp.log` dengan syntax
-```
+```bash
 cat wget.log > Backup.log.bak
 cat Location.log >> Backup.log.bak
 rm temp.log
