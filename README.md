@@ -191,6 +191,7 @@ NamaFileAwal=${1%%.*}
   
   Output yang dihasilkan:
   ![Screenshot from 2020-02-29 15-23-05](https://user-images.githubusercontent.com/58078219/75604332-fe72ef80-5b09-11ea-9b28-f7bd4724788f.png)
+  ![Screenshot from 2020-02-29 18-40-42](https://user-images.githubusercontent.com/58078219/75606903-3edf6700-5b24-11ea-8bbf-e084c912d815.png)
   
   b. Membaca argumen pertama (nama file) tanpa format file dibelakangnya yang disimpan pada variabel NamaFileAwal, lalu membuang setiap angka yang ada terdapat pada nama file dan mengalokasikannya kembali pada variabel NamaFileAwal. Lalu menyimpan kode unik yang diciptakan pada pekerjaan "a" pada nama_file.txt. Memberikan display nama file yang tercipta
 
