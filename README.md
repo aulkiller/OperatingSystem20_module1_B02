@@ -387,9 +387,13 @@ Output yang dihasilkan:
 ![Screenshot from 2020-02-29 15-31-02](https://user-images.githubusercontent.com/58078219/75604339-0599fd80-5b0a-11ea-912e-4558bbe6f761.png)
 ![Screenshot from 2020-02-29 15-31-24](https://user-images.githubusercontent.com/58078219/75604340-06cb2a80-5b0a-11ea-896e-e6636d0d4a6b.png)
 
-##### Kendala yang dihadapi pada saat pengerjaan
-###### Soal 2.a.
+#### Kendala yang dihadapi pada saat pengerjaan
+
+##### Soal 1
+Mengalami kebingungan karena tidak tahu bahwa dapat dilakukan pengerjaan awk dari yag berasal dari awk. Hal ini dapat diketahui dikarenakan diberitahu di saat melakukan demo.
+
+##### Soal 2.a.
 Terjadi kesalahpahaman ketika menegetahui soal yang diberikan. Pada mulanya penyelesaian yang dilakukan hanya perlu melihat tanda titik yang terakhir `.` yang terakhir dibuang, sehingga sempat dihasilkan suatu output yang tidak sesuai semisal terdapat file bernama `abc.txt.txt`, maka seharusnya output yang keluar brupa `abc.txt`.
 
-###### Soal 1
-Mengalami kebingungan karena 
+##### Soal 3
+Adanya kurang pemahaman mengenai proses bash yng dilakukan pada syntax yang telah dibuat, terutama bagaimana cara mendownload gambar yang sama dan seharusnya diletakkan pada folder duplicate. (Untuk gambar yng dimaskud bukan terjadi pada gambar pertama saat didownload, melainkan gambar berikutnya yang telah didownload).
